@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Interactive Safari Sunset</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    background:#ffb347;
+    font-family:sans-serif;
+}
+
+/* SKY */
+.sky{
+    position:fixed;
+    inset:0;
+    background:
+        linear-gradient(
+            to bottom,
+            #ff9966 0%,
+            #ffb347 30%,
+            #f6d365 60%,
+            #f8e16c 100%
+        );
+}
+
+/* SUN */
+.sun{
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:radial-gradient(circle,#fff6b0,#ff9d00);
+    top:60px;
+    right:120px;
+    box-shadow:0 0 80px rgba(255,180,0,0.8);
+}
+
+/* GROUND */
+.ground{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:35%;
+    background:
+        linear-gradient(
+            to bottom,
+            #7fa34d,
+            #4f6f2f
+        );
+}
+
+/* LAKE */
+.lake{
+    position:absolute;
+    bottom:80px;
+    left:15%;
+    width:350px;
+    height:120px;
+    background:
+        linear-gradient(
+            to bottom,
+            #67c6ff,
+            #2f7fb5
+        );
+    border-radius:50%;
+    opacity:0.9;
+    box-shadow:0 0 30px rgba(0,120,255,0.4);
+}
+
+/* ROCKS */
+.rock{
+    position:absolute;
+    background:#7d7468;
+    border-radius:50%;
+}
+
+.rock1{
+    width:140px;
+    height:70px;
+    bottom:110px;
+    left:48%;
+}
+
+.rock2{
+    width:100px;
+    height:50px;
+    bottom:90px;
+    right:18%;
+}
+
+/* TREES */
+.tree{
+    position:absolute;
+    bottom:120px;
+}
+
+.trunk{
+    width:30px;
+    background:#5c3317;
+    height:140px;
+    margin:auto;
+}
+
+.leaves{
+    width:120px;
+    height:120px;
+    background:#2f6b2f;
+    border-radius:50%;
+    margin-left:-45px;
+    margin-top:-30px;
+    box-shadow:
+        -30px 10px 0 #3d7a3d,
+        30px 10px 0 #2c5f2c;
+}
+
+.tree1{ left:8%; }
+.tree2{ left:70%; transform:scale(1.2); }
+.tree3{ left:88%; transform:scale(0.9); }
+
+/* BIRDS */
+.bird{
+    position:absolute;
+    font-size:42px;
+    animation:fly linear infinite;
+    user-select:none;
+}
+
+.bird1{
+    top:120px;
+    animation-duration:18s;
+}
+
+.bird2{
+    top:180px;
+    animation-duration:24s;
+    animation-delay:-8s;
+}
+
+@keyframes fly{
+    from{
+        transform:translateX(-200px);
+    }
+    to{
+        transform:translateX(calc(100vw + 300px));
+    }
+}
+
+/* ANIMALS */
+.animal{
+    position:absolute;
+    bottom:120px;
+    font-size:90px;
+    cursor:pointer;
+    transition:transform 0.2s;
+    user-select:none;
+}
+
+.lion{
+    left:22%;
+}
+
+.elephant{
+    left:55%;
+    bottom:115px;
+}
+
+.giraffe{
+    left:78%;
+    bottom:135px;
+    font-size:110px;
+}
+
+/* JUMP */
+.jump{
+    animation:jump 0.8s ease;
+}
+
+@keyframes jump{
+    0%{
+        transform:translateY(0);
+    }
+
+    30%{
+        transform:translateY(-140px) rotate(-5deg);
+    }
+
+    50%{
+        transform:translateY(-160px) rotate(5deg);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+/* FLOATING LEAVES */
+.leaf{
+    position:absolute;
+    top:-50px;
+    font-size:24px;
+    opacity:0.7;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-100px) rotate(0deg);
+    }
+    to{
+        transform:translateY(calc(100vh + 100px)) rotate(360deg);
+    }
+}
+
+/* SAFARI TEXT */
+.title{
+    position:absolute;
+    top:30px;
+    left:40px;
+    color:white;
+    font-size:42px;
+    font-weight:bold;
+    letter-spacing:2px;
+    text-shadow:
+        0 0 10px rgba(0,0,0,0.3),
+        0 0 20px rgba(0,0,0,0.2);
+}
+
+.subtitle{
+    position:absolute;
+    top:85px;
+    left:45px;
+    color:#fff7d6;
+    font-size:18px;
+    letter-spacing:1px;
+}
+</style>
+</head>
+<body>
+
+<div class="sky">
+
+    <div class="sun"></div>
+
+    <div class="title">Safari Sunset</div>
+    <div class="subtitle">Touch the animals ✨</div>
+
+    <!-- BIRDS -->
+    <div class="bird bird1">🦅</div>
+    <div class="bird bird2">🕊️</div>
+
+    <!-- LEAVES -->
+    <div class="leaf" style="left:10%; animation-duration:12s;">🍃</div>
+    <div class="leaf" style="left:30%; animation-duration:16s;">🍃</div>
+    <div class="leaf" style="left:55%; animation-duration:10s;">🍂</div>
+    <div class="leaf" style="left:80%; animation-duration:14s;">🍃</div>
+
+    <!-- TREES -->
+    <div class="tree tree1">
+        <div class="trunk"></div>
+        <div class="leaves"></div>
+    </div>
+
+    <div class="tree tree2">
+        <div class="trunk"></div>
+        <div class="leaves"></div>
+    </div>
+
+    <div class="tree tree3">
+        <div class="trunk"></div>
+        <div class="leaves"></div>
+    </div>
+
+    <!-- LAKE -->
+    <div class="lake"></div>
+
+    <!-- ROCKS -->
+    <div class="rock rock1"></div>
+    <div class="rock rock2"></div>
+
+    <!-- ANIMALS -->
+    <div class="animal lion">🦁</div>
+    <div class="animal elephant">🐘</div>
+    <div class="animal giraffe">🦒</div>
+
+    <!-- GROUND -->
+    <div class="ground"></div>
+
+</div>
+
+<script>
+const animals = document.querySelectorAll(".animal");
+
+animals.forEach(animal => {
+
+    animal.addEventListener("mouseenter", () => {
+
+        animal.classList.remove("jump");
+
+        // restart animation
+        void animal.offsetWidth;
+
+        animal.classList.add("jump");
+    });
+
+});
+</script>
+
+</body>
+</html>
