@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Safari Jungle Sunset</title>
+<title>Interaktiivne Tähtede Sadu</title>
 
 <style>
 *{
@@ -14,466 +14,417 @@
 
 body{
     overflow:hidden;
+    height:100vh;
+    background:
+        radial-gradient(circle at bottom, #1f2f5c 0%, #0b1026 50%, #02030a 100%);
     font-family:Arial,sans-serif;
-    background:#ffb347;
+    cursor:crosshair;
 }
 
-/* SKY */
-.sky{
-    position:fixed;
+/* SKY GLOW */
+.sky-glow{
+    position:absolute;
     inset:0;
     background:
-    linear-gradient(
-        to bottom,
-        #ff8c42 0%,
-        #ffb347 30%,
-        #ffd56b 60%,
-        #ffe79a 100%
-    );
+        radial-gradient(circle at top, rgba(120,150,255,0.12), transparent 60%);
 }
 
-/* SUNSET SUN */
-.sun{
+/* MOON */
+.moon{
     position:absolute;
-    width:220px;
-    height:220px;
+    width:170px;
+    height:170px;
     border-radius:50%;
-    background:
-        radial-gradient(circle,#fff6b0,#ff9a00);
-    top:40px;
+    top:60px;
     right:120px;
+
+    background:
+        radial-gradient(circle at 35% 35%,
+        #ffffff 0%,
+        #f0f3ff 45%,
+        #c7d0ff 75%,
+        #9aa8ff 100%);
+
     box-shadow:
-        0 0 80px rgba(255,170,0,0.8),
-        0 0 150px rgba(255,120,0,0.4);
+        0 0 40px rgba(255,255,255,0.8),
+        0 0 90px rgba(180,200,255,0.5),
+        0 0 150px rgba(120,160,255,0.3);
+}
+
+/* MOON CRATERS */
+.crater{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(180,190,220,0.35);
+}
+
+.c1{
+    width:24px;
+    height:24px;
+    top:40px;
+    left:55px;
+}
+
+.c2{
+    width:18px;
+    height:18px;
+    top:90px;
+    left:100px;
+}
+
+.c3{
+    width:12px;
+    height:12px;
+    top:70px;
+    left:40px;
+}
+
+/* BACKGROUND STARS */
+.star{
+    position:absolute;
+    background:white;
+    border-radius:50%;
+    animation:twinkle infinite alternate;
+}
+
+@keyframes twinkle{
+    from{
+        opacity:0.3;
+        transform:scale(1);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1.5);
+    }
+}
+
+/* SHOOTING STARS */
+.shooting-star{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    box-shadow:
+        0 0 10px white,
+        0 0 20px #8ab4ff,
+        0 0 40px #8ab4ff;
+
+    pointer-events:none;
+}
+
+.shooting-star::after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:2px;
+    background:
+        linear-gradient(
+            to right,
+            rgba(255,255,255,0.9),
+            rgba(255,255,255,0)
+        );
+
+    transform-origin:left center;
+    transform:rotate(0deg);
 }
 
 /* MOUNTAINS */
 .mountain{
     position:absolute;
-    bottom:240px;
+    bottom:0;
     width:0;
     height:0;
-    border-left:220px solid transparent;
-    border-right:220px solid transparent;
-    border-bottom:260px solid rgba(60,70,50,0.35);
+    border-left:260px solid transparent;
+    border-right:260px solid transparent;
+    border-bottom:320px solid rgba(15,20,35,0.95);
 }
 
-.m1{ left:-40px; }
-.m2{ left:280px; transform:scale(1.2); }
-.m3{ right:120px; }
+.m1{
+    left:-100px;
+}
 
-/* GROUND */
-.ground{
+.m2{
+    left:220px;
+    transform:scale(1.2);
+}
+
+.m3{
+    right:150px;
+    transform:scale(1.1);
+}
+
+.m4{
+    right:-120px;
+}
+
+/* FOREST */
+.forest{
     position:absolute;
     bottom:0;
     width:100%;
-    height:38%;
-    background:
-    linear-gradient(
-        to bottom,
-        #699d45,
-        #355d25
-    );
+    height:220px;
 }
 
-/* LAKE */
-.lake{
-    position:absolute;
-    width:420px;
-    height:140px;
-    background:
-        linear-gradient(
-            to bottom,
-            #70d6ff,
-            #2f82a8
-        );
-    border-radius:50%;
-    bottom:70px;
-    left:15%;
-    box-shadow:
-        0 0 30px rgba(0,150,255,0.5);
-    opacity:0.9;
-}
-
-/* ROCKS */
-.rock{
-    position:absolute;
-    background:#72695d;
-    border-radius:50%;
-}
-
-.rock1{
-    width:150px;
-    height:70px;
-    bottom:110px;
-    left:50%;
-}
-
-.rock2{
-    width:110px;
-    height:55px;
-    bottom:90px;
-    right:16%;
-}
-
-.rock3{
-    width:90px;
-    height:45px;
-    bottom:115px;
-    left:40%;
-}
-
-/* BIG TREES */
+/* TREES */
 .tree{
     position:absolute;
-    bottom:170px;
+    bottom:0;
+    width:0;
+    height:0;
+    border-left:35px solid transparent;
+    border-right:35px solid transparent;
+    border-bottom:120px solid #09111f;
 }
 
-.trunk{
-    width:38px;
-    height:190px;
-    background:#593516;
-    margin:auto;
-    border-radius:10px;
-}
-
-.leaves{
-    position:relative;
-    width:170px;
-    height:170px;
-    background:#2f7a2f;
-    border-radius:50%;
-    margin-left:-66px;
-    margin-top:-30px;
-    box-shadow:
-        -60px 25px 0 #418b41,
-        60px 20px 0 #2b6b2b,
-        0 60px 0 #3d8c3d;
-}
-
-.tree1{ left:5%; transform:scale(1.1); }
-.tree2{ left:25%; transform:scale(1.4); }
-.tree3{ left:70%; transform:scale(1.3); }
-.tree4{ left:88%; transform:scale(1); }
-
-/* PLANTS */
-.plant{
+.tree::after{
+    content:"";
     position:absolute;
-    bottom:120px;
-    font-size:48px;
-    opacity:0.95;
-}
-
-.p1{ left:8%; }
-.p2{ left:18%; }
-.p3{ left:32%; }
-.p4{ left:46%; }
-.p5{ left:58%; }
-.p6{ left:66%; }
-.p7{ left:76%; }
-.p8{ left:90%; }
-
-/* GRASS */
-.grass{
-    position:absolute;
-    bottom:105px;
-    width:100%;
-    height:30px;
-    background:
-        repeating-linear-gradient(
-            90deg,
-            #4f8a34 0px,
-            #4f8a34 10px,
-            #5c9c3b 10px,
-            #5c9c3b 20px
-        );
-}
-
-/* BIRDS */
-.bird{
-    position:absolute;
-    font-size:38px;
-    animation:fly linear infinite;
-    user-select:none;
-}
-
-.b1{
+    width:10px;
+    height:35px;
+    background:#111;
+    left:-5px;
     top:120px;
-    animation-duration:18s;
 }
 
-.b2{
-    top:190px;
-    animation-duration:25s;
-    animation-delay:-8s;
-}
-
-.b3{
-    top:90px;
-    animation-duration:20s;
-    animation-delay:-4s;
-}
-
-@keyframes fly{
-    from{
-        transform:translateX(-200px);
-    }
-    to{
-        transform:translateX(calc(100vw + 300px));
-    }
-}
-
-/* ANIMALS */
-.animal{
+.glow{
     position:absolute;
-    bottom:120px;
-    cursor:pointer;
-    user-select:none;
-    transition:transform 0.2s;
-    filter:drop-shadow(0 8px 6px rgba(0,0,0,0.25));
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#a7c8ff;
+    box-shadow:
+        0 0 8px #a7c8ff,
+        0 0 15px #7ca7ff;
+    animation:pulse 2s infinite alternate;
 }
 
-.lion{
-    left:12%;
-    font-size:95px;
-}
-
-.elephant{
-    left:28%;
-    font-size:105px;
-}
-
-.giraffe{
-    left:46%;
-    font-size:115px;
-    bottom:130px;
-}
-
-.zebra{
-    left:62%;
-    font-size:90px;
-}
-
-.monkey{
-    left:78%;
-    font-size:85px;
-    bottom:170px;
-}
-
-.hippo{
-    left:85%;
-    font-size:100px;
-}
-
-/* JUMP */
-.jump{
-    animation:jump 0.8s ease;
-}
-
-@keyframes jump{
-    0%{
-        transform:translateY(0);
-    }
-
-    30%{
-        transform:translateY(-120px) rotate(-6deg);
-    }
-
-    50%{
-        transform:translateY(-150px) rotate(6deg);
-    }
-
-    100%{
-        transform:translateY(0);
-    }
-}
-
-/* LEAVES FLOATING */
-.leaf{
-    position:absolute;
-    top:-80px;
-    font-size:26px;
-    opacity:0.8;
-    animation:fall linear infinite;
-}
-
-@keyframes fall{
+@keyframes pulse{
     from{
-        transform:
-            translateY(-100px)
-            rotate(0deg);
+        opacity:0.3;
+        transform:scale(1);
     }
 
     to{
-        transform:
-            translateY(calc(100vh + 150px))
-            rotate(360deg);
+        opacity:1;
+        transform:scale(1.8);
     }
 }
 
 /* TITLE */
 .title{
     position:absolute;
-    top:30px;
-    left:40px;
+    top:40px;
+    left:50px;
     color:white;
     font-size:52px;
     font-weight:bold;
     letter-spacing:2px;
+
     text-shadow:
-        0 0 15px rgba(0,0,0,0.3);
+        0 0 10px rgba(255,255,255,0.5),
+        0 0 20px rgba(120,160,255,0.4);
 }
 
 .subtitle{
     position:absolute;
-    top:95px;
-    left:45px;
-    color:#fff4d2;
+    top:105px;
+    left:54px;
+    color:#b8c8ff;
     font-size:20px;
     letter-spacing:1px;
 }
 
-/* SMALL BUSHES */
-.bush{
+/* CLICK EFFECT */
+.click-ring{
     position:absolute;
-    width:120px;
-    height:70px;
-    background:#3f8a3f;
+    border:2px solid rgba(255,255,255,0.7);
     border-radius:50%;
-    bottom:115px;
+    pointer-events:none;
+    animation:ring 0.8s ease-out forwards;
 }
 
-.bush::before,
-.bush::after{
-    content:"";
-    position:absolute;
-    width:90px;
-    height:70px;
-    background:#4f9d4f;
-    border-radius:50%;
-}
+@keyframes ring{
+    from{
+        width:10px;
+        height:10px;
+        opacity:1;
+        transform:translate(-50%,-50%);
+    }
 
-.bush::before{
-    left:-30px;
-    top:10px;
+    to{
+        width:180px;
+        height:180px;
+        opacity:0;
+        transform:translate(-50%,-50%);
+    }
 }
-
-.bush::after{
-    right:-30px;
-    top:10px;
-}
-
-.b1b{ left:38%; }
-.b2b{ left:58%; }
-.b3b{ left:72%; }
 
 </style>
 </head>
 
 <body>
 
-<div class="sky">
+<div class="sky-glow"></div>
 
-    <!-- SUN -->
-    <div class="sun"></div>
-
-    <!-- MOUNTAINS -->
-    <div class="mountain m1"></div>
-    <div class="mountain m2"></div>
-    <div class="mountain m3"></div>
-
-    <!-- TITLE -->
-    <div class="title">Safari Jungle</div>
-    <div class="subtitle">Liiguta hiirt loomade peale ✨</div>
-
-    <!-- BIRDS -->
-    <div class="bird b1">🦜</div>
-    <div class="bird b2">🦅</div>
-    <div class="bird b3">🕊️</div>
-
-    <!-- FALLING LEAVES -->
-    <div class="leaf" style="left:5%; animation-duration:12s;">🍃</div>
-    <div class="leaf" style="left:18%; animation-duration:16s;">🍂</div>
-    <div class="leaf" style="left:36%; animation-duration:10s;">🍃</div>
-    <div class="leaf" style="left:58%; animation-duration:14s;">🍃</div>
-    <div class="leaf" style="left:72%; animation-duration:18s;">🍂</div>
-    <div class="leaf" style="left:88%; animation-duration:11s;">🍃</div>
-
-    <!-- BIG TREES -->
-    <div class="tree tree1">
-        <div class="trunk"></div>
-        <div class="leaves"></div>
-    </div>
-
-    <div class="tree tree2">
-        <div class="trunk"></div>
-        <div class="leaves"></div>
-    </div>
-
-    <div class="tree tree3">
-        <div class="trunk"></div>
-        <div class="leaves"></div>
-    </div>
-
-    <div class="tree tree4">
-        <div class="trunk"></div>
-        <div class="leaves"></div>
-    </div>
-
-    <!-- BUSHES -->
-    <div class="bush b1b"></div>
-    <div class="bush b2b"></div>
-    <div class="bush b3b"></div>
-
-    <!-- PLANTS -->
-    <div class="plant p1">🌿</div>
-    <div class="plant p2">🌱</div>
-    <div class="plant p3">🌴</div>
-    <div class="plant p4">🌿</div>
-    <div class="plant p5">🌱</div>
-    <div class="plant p6">🌴</div>
-    <div class="plant p7">🌿</div>
-    <div class="plant p8">🌱</div>
-
-    <!-- LAKE -->
-    <div class="lake"></div>
-
-    <!-- ROCKS -->
-    <div class="rock rock1"></div>
-    <div class="rock rock2"></div>
-    <div class="rock rock3"></div>
-
-    <!-- ANIMALS -->
-    <div class="animal lion">🦁</div>
-    <div class="animal elephant">🐘</div>
-    <div class="animal giraffe">🦒</div>
-    <div class="animal zebra">🦓</div>
-    <div class="animal monkey">🐒</div>
-    <div class="animal hippo">🦛</div>
-
-    <!-- GRASS -->
-    <div class="grass"></div>
-
-    <!-- GROUND -->
-    <div class="ground"></div>
-
+<!-- MOON -->
+<div class="moon">
+    <div class="crater c1"></div>
+    <div class="crater c2"></div>
+    <div class="crater c3"></div>
 </div>
+
+<!-- TITLE -->
+<div class="title">Öine Tähtede Sadu</div>
+<div class="subtitle">
+    Liiguta hiirt või kliki taevasse ✨
+</div>
+
+<!-- MOUNTAINS -->
+<div class="mountain m1"></div>
+<div class="mountain m2"></div>
+<div class="mountain m3"></div>
+<div class="mountain m4"></div>
+
+<!-- FOREST -->
+<div class="forest" id="forest"></div>
 
 <script>
 
-const animals = document.querySelectorAll(".animal");
+/* BACKGROUND STARS */
+for(let i = 0; i < 180; i++){
 
-animals.forEach(animal => {
+    const star = document.createElement("div");
+    star.classList.add("star");
 
-    animal.addEventListener("mouseenter", () => {
+    const size = Math.random() * 3;
 
-        animal.classList.remove("jump");
+    star.style.width = size + "px";
+    star.style.height = size + "px";
 
-        void animal.offsetWidth;
+    star.style.left = Math.random() * window.innerWidth + "px";
+    star.style.top = Math.random() * window.innerHeight * 0.75 + "px";
 
-        animal.classList.add("jump");
+    star.style.animationDuration =
+        (1 + Math.random() * 4) + "s";
+
+    document.body.appendChild(star);
+}
+
+/* TREES */
+const forest = document.getElementById("forest");
+
+for(let i = 0; i < 45; i++){
+
+    const tree = document.createElement("div");
+    tree.classList.add("tree");
+
+    tree.style.left =
+        Math.random() * window.innerWidth + "px";
+
+    tree.style.transform =
+        `scale(${0.5 + Math.random() * 1.4})`;
+
+    forest.appendChild(tree);
+
+    /* GLOW LIGHTS */
+    if(Math.random() > 0.65){
+
+        const glow = document.createElement("div");
+        glow.classList.add("glow");
+
+        glow.style.left =
+            parseFloat(tree.style.left) + 20 + "px";
+
+        glow.style.bottom =
+            (40 + Math.random() * 140) + "px";
+
+        document.body.appendChild(glow);
+    }
+}
+
+/* SHOOTING STAR FUNCTION */
+function createShootingStar(x,y){
+
+    const star = document.createElement("div");
+    star.classList.add("shooting-star");
+
+    star.style.left = x + "px";
+    star.style.top = y + "px";
+
+    document.body.appendChild(star);
+
+    const angle = 25 + Math.random() * 20;
+    const distance = 500 + Math.random() * 400;
+
+    star.animate([
+        {
+            transform:`translate(0,0) rotate(${angle}deg)`,
+            opacity:1
+        },
+        {
+            transform:
+            `translate(${distance}px, ${distance * 0.45}px)
+             rotate(${angle}deg)`,
+
+            opacity:0
+        }
+    ],{
+        duration:1200,
+        easing:"ease-out"
     });
 
+    setTimeout(() => {
+        star.remove();
+    },1300);
+}
+
+/* AUTO STAR RAIN */
+setInterval(() => {
+
+    const x = Math.random() * window.innerWidth * 0.7;
+    const y = Math.random() * window.innerHeight * 0.4;
+
+    createShootingStar(x,y);
+
+}, 700);
+
+/* INTERACTIVE MOUSE MOVE */
+document.addEventListener("mousemove",(e) => {
+
+    if(Math.random() > 0.92){
+
+        createShootingStar(e.clientX,e.clientY);
+    }
+});
+
+/* CLICK BURST */
+document.addEventListener("click",(e) => {
+
+    const ring = document.createElement("div");
+    ring.classList.add("click-ring");
+
+    ring.style.left = e.clientX + "px";
+    ring.style.top = e.clientY + "px";
+
+    document.body.appendChild(ring);
+
+    setTimeout(() => {
+        ring.remove();
+    },800);
+
+    for(let i = 0; i < 6; i++){
+
+        setTimeout(() => {
+
+            createShootingStar(
+                e.clientX + Math.random()*120 - 60,
+                e.clientY + Math.random()*50 - 25
+            );
+
+        }, i * 120);
+    }
 });
 
 </script>
